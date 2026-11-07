@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyHub – Python Programming</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="app.js"></script>
+</head>
+<body class="subject-python">
+
+<div class="bg-fx"><div class="bg-glow-1"></div><div class="bg-glow-2"></div></div>
+
+<nav class="navbar">
+  <a href="subjects.html" class="navbar-brand"><div class="brand-icon">📚</div><span class="brand-name">StudyHub</span></a>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Theme">🌗</button>
+    <span class="nav-user">Hello, <strong id="userName">Student</strong></span>
+    <button class="nav-logout" onclick="logout()">Logout</button>
+  </div>
+</nav>
+<div class="page">
+  <a href="subjects.html" class="back-link">← Back to Subjects</a>
+  <div class="unit-header">
+    <div class="u-tag">🐍 Subject 04</div>
+    <h1>Python Programming</h1>
+    <p>Click any chapter title to open notes. Questions with ⭐ are important for exams.</p>
+  </div>
+  <div class="important-banner">⭐ Questions marked <strong>IMPORTANT</strong> are high-priority. Click any <strong>Chapter Title</strong> to read its notes 📖</div>
+
+  <!-- Ch 1 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=python&ch=1" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 1 — Python Basics</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">What is Python? List its key features. How is Python different from Java and C++?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">Explain the built-in data types in Python: <code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>, <code>list</code>, <code>tuple</code>, <code>set</code>, <code>dict</code>. Give one example each.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">What is type casting in Python? Explain implicit and explicit type conversion with examples.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Explain the use of <code>input()</code> and <code>print()</code> in Python. What is string formatting using f-strings?</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">Write a Python program to swap two numbers without using a third variable.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 2 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=python&ch=2" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 2 — Control Flow & Loops</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">Explain <code>if</code>, <code>elif</code>, <code>else</code> statements in Python with a grading system example.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">Explain <code>for</code> loop and <code>while</code> loop in Python. What is the use of <code>break</code>, <code>continue</code>, and <code>pass</code>?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">Write a Python program to print all prime numbers between 1 and 100 using a for loop.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">What is a List Comprehension in Python? Compare it with a traditional for loop. Give 3 examples.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">Write a Python program to generate the Fibonacci series up to N terms using a while loop.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 3 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=python&ch=3" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 3 — Functions & Modules</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">What is a function in Python? Explain with syntax. What are default arguments, keyword arguments, and *args / **kwargs?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">What is a Lambda function? Compare with a regular function. Give 3 examples using <code>map()</code>, <code>filter()</code>, <code>reduce()</code>.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">Explain Recursion in Python. Write a recursive function to compute the factorial of a number.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">What is a Python Module? How do you create and import a module? Explain <code>import</code>, <code>from ... import</code>, and alias.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">Explain the scope of variables in Python: Local, Enclosing, Global, Built-in (LEGB Rule).</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 4 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=python&ch=4" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 4 — OOP in Python & File Handling</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">Explain Classes and Objects in Python. What is <code>__init__</code>? What is the role of <code>self</code>?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">Explain Inheritance in Python: Single, Multiple, Multilevel. What is <code>super()</code>?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">What are Dunder (Magic) methods in Python? Explain <code>__str__</code>, <code>__len__</code>, <code>__add__</code> with examples.</span></div></li>
+      <li class="question-item important"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Explain File Handling in Python. How do you open, read, write, and close a file? Explain modes: <code>r</code>, <code>w</code>, <code>a</code>, <code>rb</code>.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">What are Decorators in Python? Write a simple decorator that measures the execution time of a function.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 5 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=python&ch=5" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 5 — Python Libraries & Exception Handling</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">Explain Exception Handling in Python using <code>try</code>, <code>except</code>, <code>else</code>, <code>finally</code>. Raise a custom exception.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">What is NumPy? Explain arrays, indexing, slicing, and basic operations with examples.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">What is Pandas? How do you create a DataFrame? Explain <code>head()</code>, <code>tail()</code>, <code>describe()</code>, <code>groupby()</code>.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Explain Matplotlib. Write a Python program to plot a Bar chart and Line graph for student marks data.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">What are Python Virtual Environments? How do you create one using <code>venv</code>? Why are they used in projects?</span></div></li>
+    </ul>
+  </div>
+</div>
+<footer class="footer">StudyHub · Python Programming · 2024</footer>
+<script>
+  const user = JSON.parse(sessionStorage.getItem('studyhub_user') || 'null');
+  if (!user) window.location.href = 'index.html';
+  else document.getElementById('userName').textContent = user.name;
+  function logout() { if (confirm('Logout?')) { sessionStorage.removeItem('studyhub_user'); window.location.href = 'index.html'; } }
+</script>
+</body>
+</html>

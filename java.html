@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyHub – Java Programming</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="app.js"></script>
+</head>
+<body class="subject-java">
+
+<div class="bg-fx"><div class="bg-glow-1"></div><div class="bg-glow-2"></div></div>
+
+<nav class="navbar">
+  <a href="subjects.html" class="navbar-brand"><div class="brand-icon">📚</div><span class="brand-name">StudyHub</span></a>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Theme">🌗</button>
+    <span class="nav-user">Hello, <strong id="userName">Student</strong></span>
+    <button class="nav-logout" onclick="logout()">Logout</button>
+  </div>
+</nav>
+<div class="page">
+  <a href="subjects.html" class="back-link">← Back to Subjects</a>
+  <div class="unit-header unit-header-java">
+    <div class="unit-header-icon">☕</div>
+    <div class="unit-header-text">
+      <div class="u-tag">Subject 03 · Java Programming</div>
+      <h1>Java Programming</h1>
+      <p>Click any chapter title to open notes. Questions marked ⭐ are important for exams.</p>
+    </div>
+  </div>
+  <div class="important-banner">⭐ Questions marked <strong>IMPORTANT</strong> are high-priority. Click any <strong>Chapter Title</strong> to read its notes 📖</div>
+
+  <!-- Ch 1 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=java&ch=1" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 1 — Java Basics & Fundamentals</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">What is Java? Explain the features: Platform Independence, Object-Oriented, Robust, Secure, and Multithreaded.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">Explain the JDK, JRE, and JVM. What is the role of bytecode in Java's platform independence?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">List all primitive data types in Java with their sizes and default values. Give one example each.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">What are operators in Java? Explain Arithmetic, Relational, Logical, Bitwise, and Assignment operators with examples.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">Write a Java program to find whether a given number is Even or Odd using if-else.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 2 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=java&ch=2" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 2 — Object-Oriented Programming (OOP)</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">Explain the four pillars of OOP: Encapsulation, Inheritance, Polymorphism, and Abstraction with real-world examples.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">What is Method Overloading and Method Overriding? How are they different? Give Java code examples.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">3</div><div class="q-body"><span class="q-text">Explain <code>this</code> and <code>super</code> keywords in Java with examples.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">What is a Constructor? Explain Default, Parameterized, and Copy constructors in Java.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">Explain Single, Multilevel, and Hierarchical Inheritance in Java with code examples.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 3 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=java&ch=3" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 3 — Interfaces & Abstract Classes</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">What is an Abstract Class in Java? How is it different from a regular class? When should you use it?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">What is an Interface in Java? How is it different from an Abstract Class? Can a class implement multiple interfaces?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">What are the <code>static</code> and <code>final</code> keywords in Java? Explain with examples.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Write a Java program demonstrating the use of an interface for achieving runtime polymorphism.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">What are access modifiers in Java? Explain <code>private</code>, <code>protected</code>, <code>public</code>, and default with a table.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 4 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=java&ch=4" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 4 — Exception Handling</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">What is Exception Handling in Java? Explain <code>try</code>, <code>catch</code>, <code>finally</code>, <code>throw</code>, and <code>throws</code> keywords.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">Differentiate between Checked and Unchecked Exceptions with examples. Give 3 examples of each.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">Write a Java program to handle <code>ArithmeticException</code> when dividing a number by zero.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">How do you create a Custom Exception class in Java? Write an example of a user-defined exception.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">Explain the exception hierarchy in Java. What is the difference between <code>Error</code> and <code>Exception</code>?</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 5 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=java&ch=5" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 5 — Collections Framework</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">What is the Java Collections Framework? Explain the hierarchy: Collection → List, Set, Queue interfaces.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">Compare <code>ArrayList</code> vs <code>LinkedList</code> vs <code>Vector</code>. When would you use each?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">Difference between <code>HashMap</code> and <code>Hashtable</code>? Explain <code>TreeMap</code> and <code>LinkedHashMap</code> too.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Write a Java program to iterate over a List using Iterator, for-each loop, and ListIterator.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">What is Generics in Java? Give an example of a generic class and a generic method.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 6 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=java&ch=6" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 6 — Multithreading & File I/O</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">What is a Thread in Java? Explain Thread Life Cycle states: New, Runnable, Running, Blocked, Dead.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">How do you create a thread in Java? Compare extending <code>Thread</code> class vs implementing <code>Runnable</code> interface.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">What is synchronization in Java? Explain with an example how it prevents race conditions.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Explain File I/O in Java. Write a program to read from and write to a text file using <code>FileReader</code> and <code>FileWriter</code>.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">What is serialization in Java? Explain the <code>Serializable</code> interface and the role of <code>transient</code> keyword.</span></div></li>
+    </ul>
+  </div>
+</div>
+<footer class="footer">StudyHub · Java Programming · 2024</footer>
+<script>
+  const user = JSON.parse(sessionStorage.getItem('studyhub_user') || 'null');
+  if (!user) window.location.href = 'index.html';
+  else document.getElementById('userName').textContent = user.name;
+  function logout() { if (confirm('Logout?')) { sessionStorage.removeItem('studyhub_user'); window.location.href = 'index.html'; } }
+</script>
+</body>
+</html>

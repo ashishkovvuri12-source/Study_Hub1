@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyHub – Admin Dashboard</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="notes-data.js"></script>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="admin.html" class="navbar-brand">
+    <div class="brand-icon">📚</div>
+    <span class="brand-name">StudyHub</span>
+  </a>
+  <div class="nav-right">
+    <span class="nav-badge admin">🛡️ Admin</span>
+    <span class="nav-user">Logged in as <strong id="userName"></strong></span>
+    <button class="nav-logout" onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- Welcome Banner -->
+  <div class="admin-welcome">
+    <div class="aw-icon">🛡️</div>
+    <div>
+      <h2>Welcome, <span id="welcomeName"></span>!</h2>
+      <p>Here's an overview of all subjects, chapters, and content on StudyHub.</p>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="admin-grid">
+    <div class="stat-card">
+      <div class="s-icon">📚</div>
+      <div class="s-val">4</div>
+      <div class="s-lbl">Total Subjects</div>
+    </div>
+    <div class="stat-card">
+      <div class="s-icon">📖</div>
+      <div class="s-val">22</div>
+      <div class="s-lbl">Total Chapters</div>
+    </div>
+    <div class="stat-card">
+      <div class="s-icon">❓</div>
+      <div class="s-val">110</div>
+      <div class="s-lbl">Total Questions</div>
+    </div>
+    <div class="stat-card">
+      <div class="s-icon">⭐</div>
+      <div class="s-val">42</div>
+      <div class="s-lbl">Important Qs</div>
+    </div>
+    <div class="stat-card">
+      <div class="s-icon">📝</div>
+      <div class="s-val">22</div>
+      <div class="s-lbl">Notes Pages</div>
+    </div>
+  </div>
+
+  <!-- Subject Overview Table -->
+  <div class="admin-section">
+    <div class="admin-section-header">
+      <h2>📋 Subject Overview</h2>
+    </div>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Chapters</th>
+          <th>Questions</th>
+          <th>Important Qs</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>📐 Mathematics</strong></td>
+          <td>6</td>
+          <td>30</td>
+          <td>14</td>
+          <td><span class="tag tag-green">Active</span></td>
+          <td><a href="maths.html" style="color:#4f46e5;font-weight:600;font-size:13px;text-decoration:none;">View →</a></td>
+        </tr>
+        <tr>
+          <td><strong>🤖 Machine Learning</strong></td>
+          <td>5</td>
+          <td>25</td>
+          <td>10</td>
+          <td><span class="tag tag-green">Active</span></td>
+          <td><a href="ml.html" style="color:#4f46e5;font-weight:600;font-size:13px;text-decoration:none;">View →</a></td>
+        </tr>
+        <tr>
+          <td><strong>☕ Java Programming</strong></td>
+          <td>6</td>
+          <td>30</td>
+          <td>12</td>
+          <td><span class="tag tag-green">Active</span></td>
+          <td><a href="java.html" style="color:#4f46e5;font-weight:600;font-size:13px;text-decoration:none;">View →</a></td>
+        </tr>
+        <tr>
+          <td><strong>🐍 Python Programming</strong></td>
+          <td>5</td>
+          <td>25</td>
+          <td>11</td>
+          <td><span class="tag tag-green">Active</span></td>
+          <td><a href="python.html" style="color:#4f46e5;font-weight:600;font-size:13px;text-decoration:none;">View →</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Chapter YouTube Tutorial Links Management -->
+  <div class="admin-section" style="margin-top: 36px;">
+    <div class="admin-section-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+      <div>
+        <h2>🎥 Chapter YouTube Tutorial Links</h2>
+        <p style="font-size:13px; color:var(--txt-s); margin-top:4px;">Provide, update, and manage YouTube video links for every chapter across subjects.</p>
+      </div>
+      <div style="display:flex; gap:6px; flex-wrap:wrap;" id="subjectFilterGroup">
+        <button class="role-tab student active" onclick="filterChapters('all')" id="flt-all" style="padding:6px 14px; font-size:13px; height:auto;">All (22 Chapters)</button>
+        <button class="role-tab" onclick="filterChapters('maths')" id="flt-maths" style="padding:6px 14px; font-size:13px; height:auto;">📐 Maths</button>
+        <button class="role-tab" onclick="filterChapters('ml')" id="flt-ml" style="padding:6px 14px; font-size:13px; height:auto;">🤖 ML</button>
+        <button class="role-tab" onclick="filterChapters('java')" id="flt-java" style="padding:6px 14px; font-size:13px; height:auto;">☕ Java</button>
+        <button class="role-tab" onclick="filterChapters('python')" id="flt-python" style="padding:6px 14px; font-size:13px; height:auto;">🐍 Python</button>
+      </div>
+    </div>
+
+    <!-- Alert Notification Banner -->
+    <div id="videoAlertBanner" style="display:none; padding:12px 16px; border-radius:10px; margin-bottom:16px; font-size:13px; font-weight:600; background:rgba(34,197,94,0.15); border:1px solid rgba(34,197,94,0.3); color:#22c55e;"></div>
+
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th style="width:170px;">Subject</th>
+          <th style="width:70px;">Ch #</th>
+          <th style="width:260px;">Chapter Title</th>
+          <th>YouTube Video Link</th>
+          <th style="width:160px; text-align:center;">Action</th>
+        </tr>
+      </thead>
+      <tbody id="chaptersVideoTbody">
+        <!-- Rendered by JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Student Accounts -->
+  <div class="admin-section">
+    <div class="admin-section-header">
+      <h2>👨‍🎓 Student Accounts</h2>
+    </div>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Student</strong></td>
+          <td><code>student</code></td>
+          <td><span class="tag tag-blue">Student</span></td>
+          <td><span class="tag tag-green">Active</span></td>
+        </tr>
+        <tr>
+          <td><strong>John</strong></td>
+          <td><code>john</code></td>
+          <td><span class="tag tag-blue">Student</span></td>
+          <td><span class="tag tag-green">Active</span></td>
+        </tr>
+        <tr>
+          <td><strong>Priya</strong></td>
+          <td><code>priya</code></td>
+          <td><span class="tag tag-blue">Student</span></td>
+          <td><span class="tag tag-green">Active</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Admin Accounts -->
+  <div class="admin-section">
+    <div class="admin-section-header">
+      <h2>🛡️ Admin Accounts</h2>
+    </div>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Administrator</strong></td>
+          <td><code>admin</code></td>
+          <td><span class="tag tag-orange">Admin</span></td>
+          <td><span class="tag tag-green">Active</span></td>
+        </tr>
+        <tr>
+          <td><strong>Faculty</strong></td>
+          <td><code>faculty</code></td>
+          <td><span class="tag tag-purple">Faculty</span></td>
+          <td><span class="tag tag-green">Active</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer class="footer">StudyHub · Admin Dashboard · 2024</footer>
+
+<script>
+  const user = JSON.parse(sessionStorage.getItem('studyhub_user') || 'null');
+  if (!user || user.role !== 'admin') window.location.href = 'index.html';
+  else {
+    document.getElementById('userName').textContent = user.name;
+    document.getElementById('welcomeName').textContent = user.name;
+  }
+
+  // Fetch real-time metrics and registered users from MongoDB backend
+  const token = localStorage.getItem('studyhub_token');
+  const API_URL = (window.location.port === '5000' || window.location.port === '5173') ? '/api' : 'http://localhost:5000/api';
+
+  if (token) {
+    fetch(`${API_URL}/admin/stats`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    .then(r => r.json())
+    .then(res => {
+      if (res.success && res.stats) {
+        const statCards = document.querySelectorAll('.stat-card .s-val');
+        if (statCards.length >= 5) {
+          statCards[0].textContent = res.stats.totalSubjects;
+          statCards[1].textContent = res.stats.totalChapters;
+          statCards[2].textContent = res.stats.totalQuestions;
+          statCards[3].textContent = res.stats.totalImportant;
+          statCards[4].textContent = res.stats.totalNotesPages;
+        }
+      }
+    })
+    .catch(() => {});
+
+    fetch(`${API_URL}/admin/users`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+    .then(r => r.json())
+    .then(res => {
+      if (res.success && res.users && res.users.length > 0) {
+        const studentTbody = document.querySelectorAll('.admin-table tbody')[1];
+        if (studentTbody) {
+          const students = res.users.filter(u => u.role === 'student');
+          if (students.length > 0) {
+            studentTbody.innerHTML = students.map(s => `
+              <tr>
+                <td><strong>${s.name}</strong></td>
+                <td><code>${s.username}</code></td>
+                <td><span class="tag tag-blue">Student</span></td>
+                <td><span class="tag tag-green">Active</span></td>
+              </tr>
+            `).join('');
+          }
+        }
+      }
+    })
+    .catch(() => {});
+  }
+
+  function logout() {
+    if (confirm('Logout from StudyHub?')) {
+      sessionStorage.removeItem('studyhub_user');
+      localStorage.removeItem('studyhub_user');
+      localStorage.removeItem('studyhub_token');
+      window.location.href = 'index.html';
+    }
+  }
+
+  // ── YouTube Video Management Logic ──
+  let currentFilter = 'all';
+  let chaptersCache = [];
+
+  function initChapterVideos() {
+    const customVideos = JSON.parse(localStorage.getItem('studyhub_custom_videos') || '{}');
+    chaptersCache = [];
+
+    if (typeof NOTES !== 'undefined') {
+      Object.entries(NOTES).forEach(([subjKey, subjData]) => {
+        subjData.chapters.forEach(ch => {
+          const customUrl = customVideos[`${subjKey}_ch${ch.id}`];
+          chaptersCache.push({
+            subjectId: subjKey,
+            subjectName: subjData.name,
+            subjectIcon: subjData.icon,
+            chapterNumber: ch.id,
+            title: ch.title,
+            video: customUrl !== undefined ? customUrl : (ch.video || '')
+          });
+        });
+      });
+    }
+
+    renderChapterVideoRows();
+
+    // Fetch live chapters from backend if available
+    fetch(`${API_URL}/materials/all/chapters`)
+      .then(r => r.json())
+      .then(res => {
+        if (res.success && res.chapters && res.chapters.length > 0) {
+          res.chapters.forEach(serverCh => {
+            const localCh = chaptersCache.find(c => c.subjectId === serverCh.subjectId && c.chapterNumber === serverCh.chapterNumber);
+            if (localCh) {
+              localCh.video = serverCh.video || localCh.video;
+            }
+          });
+          renderChapterVideoRows();
+        }
+      })
+      .catch(() => {});
+  }
+
+  function filterChapters(subj) {
+    currentFilter = subj;
+    ['all', 'maths', 'ml', 'java', 'python'].forEach(s => {
+      const btn = document.getElementById('flt-' + s);
+      if (btn) btn.classList.toggle('active', s === subj);
+    });
+    renderChapterVideoRows();
+  }
+
+  function renderChapterVideoRows() {
+    const tbody = document.getElementById('chaptersVideoTbody');
+    if (!tbody) return;
+
+    const filtered = currentFilter === 'all'
+      ? chaptersCache
+      : chaptersCache.filter(c => c.subjectId === currentFilter);
+
+    tbody.innerHTML = filtered.map(ch => {
+      const inputId = `yt_input_${ch.subjectId}_${ch.chapterNumber}`;
+      const btnId = `yt_btn_${ch.subjectId}_${ch.chapterNumber}`;
+      const previewId = `yt_preview_${ch.subjectId}_${ch.chapterNumber}`;
+
+      return `
+        <tr>
+          <td>
+            <strong>${ch.subjectIcon} ${ch.subjectName}</strong>
+          </td>
+          <td><code>Ch ${ch.chapterNumber}</code></td>
+          <td>
+            <a href="notes.html?subject=${ch.subjectId}&ch=${ch.chapterNumber}" target="_blank" style="color:var(--txt-h); font-weight:600; text-decoration:none; font-size:13px;" title="Open Notes">
+              ${ch.title}
+            </a>
+          </td>
+          <td>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:16px;">▶️</span>
+              <input type="url"
+                     id="${inputId}"
+                     class="form-input"
+                     value="${ch.video || ''}"
+                     placeholder="Paste YouTube tutorial link (e.g. https://www.youtube.com/watch?v=...)"
+                     style="padding:8px 12px; font-size:13px; margin:0; width:100%; box-sizing:border-box;"
+              />
+            </div>
+          </td>
+          <td style="text-align:center;">
+            <div style="display:inline-flex; align-items:center; gap:8px;">
+              <button type="button"
+                      id="${btnId}"
+                      class="login-btn"
+                      onclick="saveYoutubeLink('${ch.subjectId}', ${ch.chapterNumber})"
+                      style="padding:6px 14px; font-size:12px; width:auto; border-radius:8px; margin:0;">
+                💾 Save
+              </button>
+              <a id="${previewId}"
+                 href="${ch.video || '#'}"
+                 target="_blank"
+                 style="font-size:13px; font-weight:700; color:#ef4444; text-decoration:none; display:${ch.video ? 'inline-block' : 'none'};"
+                 title="Preview on YouTube">
+                Open ↗
+              </a>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  async function saveYoutubeLink(subjectId, chapterNumber) {
+    const input = document.getElementById(`yt_input_${subjectId}_${chapterNumber}`);
+    const btn = document.getElementById(`yt_btn_${subjectId}_${chapterNumber}`);
+    const preview = document.getElementById(`yt_preview_${subjectId}_${chapterNumber}`);
+    const alertBanner = document.getElementById('videoAlertBanner');
+
+    const newVideo = input ? input.value.trim() : '';
+
+    btn.textContent = '⏳ Saving...';
+    btn.disabled = true;
+
+    // Update in-memory cache
+    const targetCh = chaptersCache.find(c => c.subjectId === subjectId && c.chapterNumber === chapterNumber);
+    if (targetCh) {
+      targetCh.video = newVideo;
+    }
+
+    // 1. Update localStorage for instant offline access
+    const customVideos = JSON.parse(localStorage.getItem('studyhub_custom_videos') || '{}');
+    customVideos[`${subjectId}_ch${chapterNumber}`] = newVideo;
+    localStorage.setItem('studyhub_custom_videos', JSON.stringify(customVideos));
+
+    // Update preview link
+    if (preview) {
+      preview.href = newVideo || '#';
+      preview.style.display = newVideo ? 'inline-block' : 'none';
+    }
+
+    // 2. Persist to Backend API
+    try {
+      await fetch(`${API_URL}/materials/${subjectId}/chapters/${chapterNumber}/video`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ video: newVideo })
+      });
+    } catch (e) {
+      // Backend might be offline; local persistence already succeeded
+    }
+
+    btn.textContent = '✅ Saved!';
+    btn.style.background = '#22c55e';
+
+    if (alertBanner) {
+      alertBanner.textContent = `✅ Successfully updated YouTube link for ${targetCh ? targetCh.subjectName : subjectId} Chapter ${chapterNumber}! Students can now watch this tutorial.`;
+      alertBanner.style.display = 'block';
+      setTimeout(() => {
+        alertBanner.style.display = 'none';
+      }, 3500);
+    }
+
+    setTimeout(() => {
+      btn.textContent = '💾 Save';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 1800);
+  }
+
+  initChapterVideos();
+</script>
+
+</body>
+</html>

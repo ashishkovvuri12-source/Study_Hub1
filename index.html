@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyHub – Login & Sign Up</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="app.js"></script>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Theme" style="position:absolute; top:30px; right:40px; z-index:300; width:44px; height:44px; border-radius:50%; font-size:22px;">🌗</button>
+
+<div class="login-page">
+
+  <!-- LEFT PANEL -->
+  <div class="login-panel-left">
+    <div class="lp-icon">📚</div>
+    <h1>StudyHub</h1>
+    <p>Your all-in-one digital learning hub with notes, questions, and more.</p>
+    <div class="lp-features">
+      <div class="lp-feat">
+        <div class="lp-feat-icon">📖</div>
+        Chapter-wise notes for every subject
+      </div>
+      <div class="lp-feat">
+        <div class="lp-feat-icon">⭐</div>
+        Important questions highlighted for exams
+      </div>
+      <div class="lp-feat">
+        <div class="lp-feat-icon">🎯</div>
+        4 subjects · 22 chapters · 110+ questions
+      </div>
+      <div class="lp-feat">
+        <div class="lp-feat-icon">🛡️</div>
+        New User Registration & Admin access
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="login-panel-right">
+    <div class="login-form-box">
+
+      <div class="login-form-title" id="formHeading">Welcome back 👋</div>
+      <div class="login-form-sub" id="formSubheading">Sign in to continue to StudyHub</div>
+
+      <!-- Mode Toggle (Sign In / Sign Up) -->
+      <div style="display:flex; background:rgba(255,255,255,0.06); border-radius:12px; padding:4px; margin-bottom:18px;">
+        <button id="modeSignInBtn" type="button" onclick="setAuthMode('signin')" style="flex:1; padding:8px; border:none; border-radius:9px; background:var(--primary); color:#fff; font-weight:700; cursor:pointer; transition:all 0.2s;">Sign In</button>
+        <button id="modeSignUpBtn" type="button" onclick="setAuthMode('signup')" style="flex:1; padding:8px; border:none; border-radius:9px; background:transparent; color:var(--text-muted); font-weight:700; cursor:pointer; transition:all 0.2s;">Sign Up</button>
+      </div>
+
+      <!-- Role Tabs -->
+      <div class="role-tabs">
+        <button class="role-tab student active" id="tabStudent" onclick="switchTab('student')">
+          👨‍🎓 Student
+        </button>
+        <button class="role-tab admin" id="tabAdmin" onclick="switchTab('admin')">
+          🛡️ Admin
+        </button>
+      </div>
+
+      <!-- Error / Success messages -->
+      <div id="errorMsg" class="error-msg" style="display:none;">⚠️ Incorrect username or password.</div>
+      <div id="successMsg" class="error-msg" style="display:none; background:rgba(34,197,94,0.15); border:1px solid rgba(34,197,94,0.3); color:#22c55e;">✅ Account created successfully!</div>
+
+      <!-- Sign Up Extra Fields -->
+      <div id="signupFields" style="display:none;">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" id="su_name" class="form-input" placeholder="e.g. Alex Johnson"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="su_email" class="form-input" placeholder="e.g. alex@example.com"/>
+        </div>
+      </div>
+
+      <!-- Main Fields -->
+      <div class="form-group">
+        <label class="form-label" id="usernameLabel">Username</label>
+        <input type="text" id="usernameInput" class="form-input" placeholder="Enter username" autocomplete="username"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" id="passwordInput" class="form-input" placeholder="Enter password (min 6 characters)" autocomplete="current-password"/>
+      </div>
+
+      <button id="submitBtn" class="login-btn" onclick="handleAuthSubmit()">Sign In →</button>
+
+      <!-- React App Quick Link Notice -->
+      <div style="margin-top:20px; padding:12px; border-radius:10px; background:rgba(99,102,241,0.08); border:1px solid rgba(99,102,241,0.2); font-size:12px; color:var(--text-muted); text-align:center;">
+        ⚡ React Fullstack Version available: run <code style="color:#6366f1;">npm run dev</code>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- end login-page -->
+
+<script>
+  if (sessionStorage.getItem('studyhub_user')) {
+    const u = JSON.parse(sessionStorage.getItem('studyhub_user'));
+    window.location.href = u.role === 'admin' ? 'admin.html' : 'subjects.html';
+  }
+
+  const USERS = {
+    student: [
+      { username: 'student', password: 'study123', name: 'Student' },
+      { username: 'john',    password: 'john123',  name: 'John'    },
+      { username: 'priya',   password: 'priya123', name: 'Priya'   }
+    ],
+    admin: [
+      { username: 'admin',   password: 'admin@123',  name: 'Administrator' },
+      { username: 'faculty', password: 'faculty123', name: 'Faculty'       }
+    ]
+  };
+
+  let currentRole = 'student';
+  let authMode = 'signin'; // 'signin' or 'signup'
+  const API_URL = (window.location.port === '5000' || window.location.port === '5173')
+    ? '/api'
+    : 'http://localhost:5000/api';
+
+  function setAuthMode(mode) {
+    authMode = mode;
+    hideAlerts();
+    const isSignUp = mode === 'signup';
+    document.getElementById('formHeading').textContent = isSignUp ? 'Create Account ✨' : 'Welcome back 👋';
+    document.getElementById('formSubheading').textContent = isSignUp ? '' : 'Sign in to continue to StudyHub';
+    document.getElementById('formSubheading').style.display = isSignUp ? 'none' : 'block';
+    document.getElementById('signupFields').style.display = isSignUp ? 'block' : 'none';
+    document.getElementById('modeSignInBtn').style.background = isSignUp ? 'transparent' : 'var(--primary)';
+    document.getElementById('modeSignInBtn').style.color = isSignUp ? 'var(--text-muted)' : '#fff';
+    document.getElementById('modeSignUpBtn').style.background = isSignUp ? 'var(--primary)' : 'transparent';
+    document.getElementById('modeSignUpBtn').style.color = isSignUp ? '#fff' : 'var(--text-muted)';
+    document.getElementById('submitBtn').textContent = isSignUp ? `Sign Up as ${currentRole === 'admin' ? 'Admin' : 'Student'} →` : `Sign In as ${currentRole === 'admin' ? 'Admin' : 'Student'} →`;
+  }
+
+  function switchTab(role) {
+    currentRole = role;
+    hideAlerts();
+    document.getElementById('tabStudent').classList.toggle('active', role === 'student');
+    document.getElementById('tabAdmin').classList.toggle('active', role === 'admin');
+    document.getElementById('submitBtn').classList.toggle('admin-btn', role === 'admin');
+    document.getElementById('submitBtn').textContent = authMode === 'signup'
+      ? `Sign Up as ${role === 'admin' ? 'Admin' : 'Student'} →`
+      : `Sign In as ${role === 'admin' ? 'Admin' : 'Student'} →`;
+    document.getElementById('usernameLabel').textContent = role === 'admin' ? 'Admin Username' : 'Username';
+  }
+
+  function hideAlerts() {
+    document.getElementById('errorMsg').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'none';
+  }
+
+  function showError(msg) {
+    const err = document.getElementById('errorMsg');
+    err.textContent = '⚠️ ' + msg;
+    err.style.display = 'flex';
+  }
+
+  function showSuccess(msg) {
+    const sc = document.getElementById('successMsg');
+    sc.textContent = '✅ ' + msg;
+    sc.style.display = 'flex';
+  }
+
+  async function handleAuthSubmit() {
+    hideAlerts();
+    const username = document.getElementById('usernameInput').value.trim();
+    const password = document.getElementById('passwordInput').value.trim();
+
+    if (!username || !password) {
+      showError('Please fill in both username and password.');
+      return;
+    }
+
+    if (authMode === 'signup') {
+      const name = document.getElementById('su_name').value.trim();
+      const email = document.getElementById('su_email').value.trim();
+      if (!name || !email) {
+        showError('Please fill in your name and email address.');
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_URL}/auth/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, name, email, password, role: currentRole })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showSuccess('Account created successfully! Redirecting...');
+          sessionStorage.setItem('studyhub_user', JSON.stringify(data.user));
+          localStorage.setItem('studyhub_user', JSON.stringify(data.user));
+          localStorage.setItem('studyhub_token', data.token);
+          setTimeout(() => {
+            window.location.href = data.user.role === 'admin' ? 'admin.html' : 'subjects.html';
+          }, 700);
+          return;
+        } else {
+          showError(data.message || 'Registration failed.');
+          return;
+        }
+      } catch (err) {
+        // Fallback: register and save user locally so signup always works
+        const localUsers = JSON.parse(localStorage.getItem('studyhub_local_users') || '[]');
+        if (localUsers.some(u => u.username.toLowerCase() === username.toLowerCase())) {
+          showError('Username is already taken. Please choose another.');
+          return;
+        }
+        const newUser = {
+          name,
+          username,
+          email,
+          password,
+          role: currentRole,
+          createdAt: new Date().toISOString()
+        };
+        localUsers.push(newUser);
+        localStorage.setItem('studyhub_local_users', JSON.stringify(localUsers));
+
+        showSuccess('Account created successfully! Redirecting...');
+        sessionStorage.setItem('studyhub_user', JSON.stringify({ name: newUser.name, username: newUser.username, role: newUser.role }));
+        localStorage.setItem('studyhub_user', JSON.stringify({ name: newUser.name, username: newUser.username, role: newUser.role }));
+        setTimeout(() => {
+          window.location.href = currentRole === 'admin' ? 'admin.html' : 'subjects.html';
+        }, 700);
+      }
+    } else {
+      // Sign In mode
+      try {
+        const res = await fetch(`${API_URL}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password, role: currentRole })
+        });
+        const data = await res.json();
+        if (data.success) {
+          sessionStorage.setItem('studyhub_user', JSON.stringify(data.user));
+          localStorage.setItem('studyhub_user', JSON.stringify(data.user));
+          localStorage.setItem('studyhub_token', data.token);
+          window.location.href = data.user.role === 'admin' ? 'admin.html' : 'subjects.html';
+          return;
+        } else {
+          showError(data.message || 'Invalid username or password.');
+          return;
+        }
+      } catch (err) {
+        // Fallback to local accounts if backend is temporarily offline
+        const localUsers = JSON.parse(localStorage.getItem('studyhub_local_users') || '[]');
+        const match = USERS[currentRole].find(u => u.username === username && u.password === password) ||
+                      localUsers.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password && u.role === currentRole);
+        if (match) {
+          sessionStorage.setItem('studyhub_user', JSON.stringify({ name: match.name, username: match.username, role: currentRole }));
+          localStorage.setItem('studyhub_user', JSON.stringify({ name: match.name, username: match.username, role: currentRole }));
+          window.location.href = currentRole === 'admin' ? 'admin.html' : 'subjects.html';
+        } else {
+          showError('Invalid credentials. Please check your username and password.');
+        }
+      }
+    }
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Enter') handleAuthSubmit(); });
+</script>
+</body>
+</html>

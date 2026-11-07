@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyHub – Machine Learning</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="app.js"></script>
+</head>
+<body class="subject-ml">
+
+<div class="bg-fx"><div class="bg-glow-1"></div><div class="bg-glow-2"></div></div>
+
+<nav class="navbar">
+  <a href="subjects.html" class="navbar-brand"><div class="brand-icon">📚</div><span class="brand-name">StudyHub</span></a>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Theme">🌗</button>
+    <span class="nav-user">Hello, <strong id="userName">Student</strong></span>
+    <button class="nav-logout" onclick="logout()">Logout</button>
+  </div>
+</nav>
+<div class="page">
+  <a href="subjects.html" class="back-link">← Back to Subjects</a>
+  <div class="unit-header unit-header-ml">
+    <div class="unit-header-icon">🤖</div>
+    <div class="unit-header-text">
+      <div class="u-tag">Subject 02 · Machine Learning</div>
+      <h1>Machine Learning</h1>
+      <p>Click any chapter title to open notes. Questions marked ⭐ are important for exams.</p>
+    </div>
+  </div>
+  <div class="important-banner">⭐ Questions marked <strong>IMPORTANT</strong> are high-priority. Click any <strong>Chapter Title</strong> to read its notes 📖</div>
+
+  <!-- Ch 1 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=ml&ch=1" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 1 — Introduction to Machine Learning</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">What is Machine Learning? Explain the difference between Supervised, Unsupervised, and Reinforcement Learning with examples.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">What is the difference between Training data and Test data? Why do we split datasets?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">Explain the terms: Feature, Label, Model, and Prediction in the context of Machine Learning.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">What is Overfitting and Underfitting? How can you prevent overfitting in a model?</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">List and briefly explain the steps in a typical Machine Learning pipeline.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 2 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=ml&ch=2" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 2 — Regression Algorithms</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">Explain Linear Regression. Write the equation of a simple linear regression line and explain each term.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">What is the cost function in Linear Regression? How does Gradient Descent minimize it?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">Differentiate between Simple Linear Regression and Multiple Linear Regression.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">What is Polynomial Regression? When should you use it over Linear Regression?</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">Explain Ridge and Lasso Regression. How do they handle overfitting?</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 3 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=ml&ch=3" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 3 — Classification Algorithms</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">What is Logistic Regression? How is it different from Linear Regression? Explain the Sigmoid function.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">Explain the K-Nearest Neighbours (KNN) algorithm. What is the role of the value K?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">Describe the Decision Tree algorithm. What are the criteria used for splitting: Gini Impurity and Information Gain?</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">What is a Support Vector Machine (SVM)? Explain the concept of a hyperplane and margin.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">Explain Naive Bayes classifier. What assumptions does it make?</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 4 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=ml&ch=4" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 4 — Clustering & Unsupervised Learning</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">Explain the K-Means clustering algorithm step by step. What are its limitations?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">2</div><div class="q-body"><span class="q-text">What is the Elbow Method? How is it used to find the optimal K in K-Means?</span></div></li>
+      <li class="question-item important"><div class="q-letter">3</div><div class="q-body"><span class="q-text">What is Principal Component Analysis (PCA)? How does it reduce dimensionality?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Explain Hierarchical Clustering. How is a dendrogram interpreted?</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">What is DBSCAN? How does it handle noise and outliers better than K-Means?</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 5 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=ml&ch=5" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 5 — Model Evaluation & Neural Networks</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">Explain the Confusion Matrix. Define Accuracy, Precision, Recall, and F1 Score with formulas.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">What is Cross-Validation? Explain K-Fold Cross-Validation with an example.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">What is ROC Curve and AUC? How are they used to evaluate a classifier?</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Explain the structure of a Neural Network: Input Layer, Hidden Layers, Output Layer, Activation Functions.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">What is Backpropagation? Describe how it updates weights in a neural network.</span></div></li>
+    </ul>
+  </div>
+</div>
+<footer class="footer">StudyHub · Machine Learning · 2024</footer>
+<script>
+  const user = JSON.parse(sessionStorage.getItem('studyhub_user') || 'null');
+  if (!user) window.location.href = 'index.html';
+  else document.getElementById('userName').textContent = user.name;
+  function logout() { if (confirm('Logout?')) { sessionStorage.removeItem('studyhub_user'); window.location.href = 'index.html'; } }
+</script>
+</body>
+</html>

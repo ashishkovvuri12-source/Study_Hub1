@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyHub – Mathematics</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="app.js"></script>
+</head>
+<body class="subject-maths">
+
+<div class="bg-fx"><div class="bg-glow-1"></div><div class="bg-glow-2"></div></div>
+
+<nav class="navbar">
+  <a href="subjects.html" class="navbar-brand"><div class="brand-icon">📚</div><span class="brand-name">StudyHub</span></a>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Theme">🌗</button>
+    <span class="nav-user">Hello, <strong id="userName">Student</strong></span>
+    <button class="nav-logout" onclick="logout()">Logout</button>
+  </div>
+</nav>
+<div class="page">
+  <a href="subjects.html" class="back-link">← Back to Subjects</a>
+  <div class="unit-header unit-header-maths">
+    <div class="unit-header-icon">📐</div>
+    <div class="unit-header-text">
+      <div class="u-tag">Subject 01 · Mathematics</div>
+      <h1>Mathematics</h1>
+      <p>Click any chapter title to open notes. Questions marked ⭐ are important for exams.</p>
+    </div>
+  </div>
+  <div class="important-banner">⭐ Questions marked <strong>IMPORTANT</strong> are high-priority. Click any <strong>Chapter Title</strong> to read its notes 📖</div>
+
+  <!-- Ch 1 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=maths&ch=1" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 1 — Number System & Basic Algebra</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">Define rational and irrational numbers. Give two examples of each.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">2</div><div class="q-body"><span class="q-text">Simplify: <code>(3x² + 5x − 2) ÷ (x + 2)</code> using polynomial long division.</span></div></li>
+      <li class="question-item important"><div class="q-letter">3</div><div class="q-body"><span class="q-text">Solve the quadratic equation: <code>x² − 7x + 12 = 0</code> using factorization method.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Find the roots of <code>2x² + 3x − 5 = 0</code> using the quadratic formula.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">What is the relationship between the roots and coefficients of a quadratic equation? State Vieta's formulas.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 2 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=maths&ch=2" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 2 — Matrices & Determinants</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">Define a matrix. Explain types: Row, Column, Square, Identity, Zero, and Diagonal matrices with examples.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">If A = [[1,2],[3,4]] and B = [[5,6],[7,8]], find A + B and A × B.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">Find the determinant of a 3×3 matrix using cofactor expansion.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Find the transpose and inverse of matrix A = [[2,1],[5,3]]. Verify A × A⁻¹ = I.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">Solve using Cramer's Rule: 2x + y = 5, 3x − 2y = 4.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 3 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=maths&ch=3" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 3 — Differential Calculus</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">State the definition of a derivative. What does it geometrically represent?</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">Differentiate: <code>f(x) = 3x³ − 5x² + 2x − 7</code>. State which rule you use at each step.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">Find dy/dx if <code>y = sin(x) · eˣ</code> using the Product Rule.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Apply the Chain Rule to find the derivative of <code>y = (3x² + 1)⁵</code>.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">Find the local maxima and minima of <code>f(x) = x³ − 3x² + 4</code>.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 4 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=maths&ch=4" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 4 — Integral Calculus</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">Explain the difference between Definite and Indefinite integrals with examples.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">2</div><div class="q-body"><span class="q-text">Evaluate: <code>∫(4x³ − 6x + 2) dx</code>.</span></div></li>
+      <li class="question-item important"><div class="q-letter">3</div><div class="q-body"><span class="q-text">Evaluate: <code>∫₀² (x² + 1) dx</code>.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Use substitution method to evaluate: <code>∫ sin(3x) dx</code>.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">State and explain the Fundamental Theorem of Calculus.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 5 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=maths&ch=5" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 5 — Probability & Statistics</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">Define Probability. State and explain the Addition and Multiplication theorems.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item important"><div class="q-letter">2</div><div class="q-body"><span class="q-text">A bag has 5 red and 3 blue balls. Find the probability of drawing a red ball at random.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">3</div><div class="q-body"><span class="q-text">Define Mean, Median, and Mode. Calculate all three for: 4, 7, 2, 9, 7, 3, 7.</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Explain Conditional Probability with a real-life example. State Bayes' theorem.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">Compute standard deviation and variance for: 10, 12, 14, 16, 18.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- Ch 6 -->
+  <div class="q-section">
+    <div class="q-section-header">
+      <a href="notes.html?subject=maths&ch=6" class="chapter-title-link"><span class="notes-icon">📖</span> Chapter 6 — Set Theory & Logic</a>
+      <span class="q-count">5 Qs</span>
+    </div>
+    <ul class="questions-list">
+      <li class="question-item important"><div class="q-letter">1</div><div class="q-body"><span class="q-text">Define a Set. Explain Union, Intersection, and Complement with a Venn diagram.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">2</div><div class="q-body"><span class="q-text">State De Morgan's Laws and verify them with an example.</span></div></li>
+      <li class="question-item important"><div class="q-letter">3</div><div class="q-body"><span class="q-text">What is a Truth Table? Construct truth tables for AND, OR, NOT, NAND and NOR operations.</span><span class="imp-tag">⭐ Important</span></div></li>
+      <li class="question-item"><div class="q-letter">4</div><div class="q-body"><span class="q-text">Differentiate between a relation and a function. Give examples of bijective, injective, and surjective functions.</span></div></li>
+      <li class="question-item"><div class="q-letter">5</div><div class="q-body"><span class="q-text">If A = {1,2,3} and B = {3,4,5}, find A ∪ B, A ∩ B, A − B, and A × B.</span></div></li>
+    </ul>
+  </div>
+</div>
+<footer class="footer">StudyHub · Mathematics · 2024</footer>
+<script>
+  const user = JSON.parse(sessionStorage.getItem('studyhub_user') || 'null');
+  if (!user) window.location.href = 'index.html';
+  else document.getElementById('userName').textContent = user.name;
+  function logout() { if (confirm('Logout?')) { sessionStorage.removeItem('studyhub_user'); window.location.href = 'index.html'; } }
+</script>
+</body>
+</html>

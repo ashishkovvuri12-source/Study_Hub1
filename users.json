@@ -1,0 +1,48 @@
+[
+  {
+    "id": "1",
+    "username": "student",
+    "password": "study123",
+    "name": "Student",
+    "email": "student@studyhub.edu",
+    "role": "student",
+    "createdAt": "2026-11-07T00:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "username": "john",
+    "password": "john123",
+    "name": "John Doe",
+    "email": "john@studyhub.edu",
+    "role": "student",
+    "createdAt": "2026-11-07T00:00:00.000Z"
+  },
+  {
+    "id": "3",
+    "username": "priya",
+    "password": "priya123",
+    "name": "Priya Sharma",
+    "email": "priya@studyhub.edu",
+    "role": "student",
+    "createdAt": "2026-11-07T00:00:00.000Z"
+  },
+  {
+    "id": "4",
+    "username": "admin",
+    "password": "admin@123",
+    "name": "Administrator",
+    "email": "admin@studyhub.edu",
+    "role": "admin",
+    "createdAt": "2026-11-07T00:00:00.000Z"
+  },
+  {
+    "id": "5",
+    "username": "faculty",
+    "password": "faculty123",
+    "name": "Faculty Member",
+    "email": "faculty@studyhub.edu",
+    "role": "admin",
+    "createdAt": "2026-11-07T00:00:00.000Z"
+  }
+]
+

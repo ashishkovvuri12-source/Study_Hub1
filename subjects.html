@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyHub – Subjects</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="app.js"></script>
+</head>
+<body>
+
+<div class="bg-fx"><div class="bg-glow-1"></div><div class="bg-glow-2"></div></div>
+
+<nav class="navbar">
+  <a href="subjects.html" class="navbar-brand">
+    <div class="brand-icon">📚</div>
+    <span class="brand-name">StudyHub</span>
+  </a>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Theme">🌗</button>
+    <span id="roleBadge" class="nav-badge student">👨‍🎓 Student</span>
+    <span class="nav-user">Hello, <strong id="userName">Student</strong></span>
+    <button class="nav-logout" onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-top">
+    <h1>Choose Your Subject</h1>
+    <p>Select a subject to view chapter-wise notes and practice questions.</p>
+  </div>
+
+  <div class="subjects-grid">
+
+    <a href="maths.html" class="subject-card maths">
+      <div class="s-num">Subject 01</div>
+      <div class="s-emoji-wrap">📐</div>
+      <div class="s-title">Mathematics</div>
+      <div class="s-meta">6 Chapters · 30 Questions</div>
+      <div class="chips">
+        <span class="chip">Algebra</span>
+        <span class="chip">Calculus</span>
+        <span class="chip">Matrices</span>
+        <span class="chip">Probability</span>
+      </div>
+      <div class="s-footer"><span>View Materials →</span></div>
+    </a>
+
+    <a href="ml.html" class="subject-card ml">
+      <div class="s-num">Subject 02</div>
+      <div class="s-emoji-wrap">🤖</div>
+      <div class="s-title">Machine Learning</div>
+      <div class="s-meta">5 Chapters · 25 Questions</div>
+      <div class="chips">
+        <span class="chip">Regression</span>
+        <span class="chip">Classification</span>
+        <span class="chip">Clustering</span>
+        <span class="chip">Neural Nets</span>
+      </div>
+      <div class="s-footer"><span>View Materials →</span></div>
+    </a>
+
+    <a href="java.html" class="subject-card java">
+      <div class="s-num">Subject 03</div>
+      <div class="s-emoji-wrap">☕</div>
+      <div class="s-title">Java Programming</div>
+      <div class="s-meta">6 Chapters · 30 Questions</div>
+      <div class="chips">
+        <span class="chip">OOP</span>
+        <span class="chip">Collections</span>
+        <span class="chip">Exception</span>
+        <span class="chip">Threads</span>
+      </div>
+      <div class="s-footer"><span>View Materials →</span></div>
+    </a>
+
+    <a href="python.html" class="subject-card python">
+      <div class="s-num">Subject 04</div>
+      <div class="s-emoji-wrap">🐍</div>
+      <div class="s-title">Python Programming</div>
+      <div class="s-meta">5 Chapters · 25 Questions</div>
+      <div class="chips">
+        <span class="chip">Basics</span>
+        <span class="chip">Functions</span>
+        <span class="chip">File I/O</span>
+        <span class="chip">Libraries</span>
+      </div>
+      <div class="s-footer"><span>View Materials →</span></div>
+    </a>
+
+  </div>
+</div>
+
+<footer class="footer">StudyHub · For Students, By Students · 2024</footer>
+
+<script>
+  const user = JSON.parse(sessionStorage.getItem('studyhub_user') || 'null');
+  if (!user) window.location.href = 'index.html';
+  else {
+    document.getElementById('userName').textContent = user.name;
+    if (user.role === 'admin') {
+      const badge = document.getElementById('roleBadge');
+      badge.className = 'nav-badge admin';
+      badge.textContent = '🛡️ Admin';
+    }
+  }
+
+  // Update counts from MongoDB backend if running
+  const API_URL = (window.location.port === '5000' || window.location.port === '5173') ? '/api' : 'http://localhost:5000/api';
+  fetch(`${API_URL}/materials`)
+    .then(r => r.json())
+    .then(res => {
+      if (res.success && res.data) {
+        res.data.forEach(sub => {
+          const card = document.querySelector(`.subject-card.${sub.subjectId} .s-meta`);
+          if (card) {
+            card.textContent = `${sub.chapterCount} Chapters · ${sub.questionCount} Questions`;
+          }
+        });
+      }
+    })
+    .catch(() => {});
+
+  function logout() {
+    if (confirm('Logout from StudyHub?')) {
+      sessionStorage.removeItem('studyhub_user');
+      localStorage.removeItem('studyhub_user');
+      localStorage.removeItem('studyhub_token');
+      window.location.href = 'index.html';
+    }
+  }
+</script>
+</body>
+</html>

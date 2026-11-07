@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyHub – Notes</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="app.js"></script>
+</head>
+<body>
+
+<div class="bg-fx"><div class="bg-glow-1"></div><div class="bg-glow-2"></div></div>
+
+<nav class="navbar">
+  <a href="subjects.html" class="navbar-brand">
+    <div class="brand-icon">📚</div>
+    <span class="brand-name">StudyHub</span>
+  </a>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Theme">🌗</button>
+    <a href="subjects.html" class="nav-logout" style="text-decoration:none; margin-right:8px;">Dashboard</a>
+    <span class="nav-user">Hello, <strong id="userName">Student</strong></span>
+    <button class="nav-logout" onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div id="notesContent">
+    <!-- Filled by JS -->
+  </div>
+</div>
+
+<footer class="footer">StudyHub · Chapter Notes · 2024</footer>
+
+<script src="notes-data.js"></script>
+<script>
+  const user = JSON.parse(sessionStorage.getItem('studyhub_user') || 'null');
+  if (!user) window.location.href = 'index.html';
+  else document.getElementById('userName').textContent = user.name;
+  
+  // Update body class based on subject for specific glow color
+  const params   = new URLSearchParams(window.location.search);
+  const subjKey  = params.get('subject') || 'maths';
+  document.body.classList.add('subject-' + subjKey);
+  const chId     = parseInt(params.get('ch')) || 1;
+
+  const subj = NOTES[subjKey];
+  if (!subj) { window.location.href = 'subjects.html'; }
+
+  const chapter  = subj.chapters.find(c => c.id === chId);
+  const customVideos = JSON.parse(localStorage.getItem('studyhub_custom_videos') || '{}');
+  if (chapter && customVideos[`${subjKey}_ch${chId}`] !== undefined) {
+    chapter.video = customVideos[`${subjKey}_ch${chId}`];
+  }
+  const chIndex  = subj.chapters.findIndex(c => c.id === chId);
+  const prev     = chIndex > 0 ? subj.chapters[chIndex - 1] : null;
+  const next     = chIndex < subj.chapters.length - 1 ? subj.chapters[chIndex + 1] : null;
+  const subjectPage = subjKey + '.html';
+
+  document.title = `StudyHub – ${chapter ? chapter.title : 'Notes'}`;
+
+  function render() {
+    if (!chapter) {
+      document.getElementById('notesContent').innerHTML = '<p>Chapter not found.</p>';
+      return;
+    }
+
+    document.getElementById('notesContent').innerHTML = `
+      <!-- Back + breadcrumb -->
+      <div class="notes-nav">
+        <a href="${subjectPage}" class="back-link">← Back to ${subj.name}</a>
+        <span style="font-size:13px;color:#9ca3af;">${subj.icon} ${subj.name} &rsaquo; Chapter ${chId}</span>
+      </div>
+
+      <!-- Chapter header -->
+      <div class="notes-header">
+        <div class="n-tag">${subj.icon} ${subj.name} · Chapter ${chId}</div>
+        <h1>${chapter.title}</h1>
+        <p>Chapter notes — read carefully and understand key concepts before attempting questions.</p>
+        ${chapter.video ? `
+        <div style="margin-top:20px;">
+          <a href="${chapter.video}" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:#ef4444; color:#fff; text-decoration:none; padding:10px 20px; border-radius:12px; font-weight:700; font-size:15px; box-shadow:0 8px 24px rgba(239,68,68,0.3); transition:all 0.3s;">
+            <span style="font-size:20px;">▶️</span> Watch YouTube Tutorial
+          </a>
+        </div>
+        ` : ''}
+      </div>
+
+      <!-- Notes body -->
+      <div class="notes-body">
+        ${chapter.content}
+      </div>
+
+      <!-- Chapter navigation -->
+      <div class="notes-pagination">
+        <a href="${prev ? `notes.html?subject=${subjKey}&ch=${prev.id}` : '#'}"
+           class="pag-btn ${prev ? '' : 'disabled'}">
+          ← ${prev ? 'Ch ' + prev.id + ': ' + shorten(prev.title) : 'No Previous'}
+        </a>
+        <a href="${subjectPage}" class="pag-btn" style="border-color:#4f46e5;color:#4f46e5;">
+          📋 All Chapters
+        </a>
+        <a href="${next ? `notes.html?subject=${subjKey}&ch=${next.id}` : '#'}"
+           class="pag-btn ${next ? '' : 'disabled'}">
+          ${next ? 'Ch ' + next.id + ': ' + shorten(next.title) : 'No Next'} →
+        </a>
+      </div>
+
+      <!-- Chapter list sidebar -->
+      <div class="q-section" style="margin-top:24px;">
+        <div class="q-section-header">
+          <h2>📑 All Chapters in ${subj.name}</h2>
+          <span class="q-count">${subj.chapters.length} Chapters</span>
+        </div>
+        <ul class="questions-list">
+          ${subj.chapters.map(c => `
+            <li class="question-item ${c.id === chId ? 'important' : ''}">
+              <div class="q-letter">${c.id}</div>
+              <div class="q-body">
+                <a href="notes.html?subject=${subjKey}&ch=${c.id}"
+                   style="color:${c.id === chId ? '#d97706' : '#4f46e5'};font-weight:600;text-decoration:none;font-size:14px;">
+                  ${c.title} ${c.id === chId ? '← You are here' : ''}
+                </a>
+              </div>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  function shorten(title, max=22) {
+    return title.length > max ? title.substring(0, max) + '…' : title;
+  }
+
+  // Try fetching live material from MongoDB backend
+  const API_URL = (window.location.port === '5000' || window.location.port === '5173') ? '/api' : 'http://localhost:5000/api';
+  fetch(`${API_URL}/materials/${subjKey}/chapters/${chId}`)
+    .then(r => r.json())
+    .then(res => {
+      if (res.success && res.chapter) {
+        chapter.title = res.chapter.title;
+        chapter.video = res.chapter.video;
+        chapter.content = res.chapter.content;
+        render();
+      }
+    })
+    .catch(() => {});
+
+  render();
+</script>
+
+</body>
+</html>
